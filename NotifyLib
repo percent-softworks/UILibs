@@ -1,0 +1,95 @@
+
+function Notify(text, text_color, top_text, wait_seconds)
+    local yOffset = 0
+    for i, v in pairs(game.CoreGui:GetChildren()) do
+        if v.Name == "NotifyLib" then
+            yOffset = yOffset + 20 
+        end
+    end
+    local NotifyLib = Instance.new("ScreenGui")
+    local MainFrame = Instance.new("Frame")
+    local UICorner = Instance.new("UICorner")
+    local Fake_Frame = Instance.new("Frame")
+    local NormalText = Instance.new("TextLabel")
+    local Top_Text = Instance.new("TextLabel")
+    local Image = Instance.new("ImageLabel")
+    local UIStroke = Instance.new("UIStroke")
+
+    --Properties:
+
+    NotifyLib.Name = "NotifyLib"
+    NotifyLib.Parent = game.CoreGui
+    NotifyLib.IgnoreGuiInset = true
+
+    MainFrame.Name = "MainFrame"
+    MainFrame.Parent = NotifyLib
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+    MainFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Position = UDim2.new(1.5, 0, 0.863177776 - yOffset / 500, 0)
+    MainFrame.Size = UDim2.new(0, 220, 0, 33)
+
+    UIStroke.LineJoinMode = "Round"
+    UIStroke.Color = Color3.fromRGB(74, 3, 255)
+    UIStroke.Thickness = 1
+    UIStroke.Transparency = 1
+    UIStroke.Parent = MainFrame
+    
+    UICorner.Parent = MainFrame
+
+    Fake_Frame.Name = "Fake_Frame"
+    Fake_Frame.Parent = MainFrame
+    Fake_Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    Fake_Frame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+    Fake_Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Fake_Frame.BorderSizePixel = 0
+    Fake_Frame.Position = UDim2.new(0.80645752, 0, 0.499541312, 0)
+    Fake_Frame.Size = UDim2.new(0, 100, 0, 33)
+
+    NormalText.Name = "NormalText"
+    NormalText.Parent = MainFrame
+    NormalText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    NormalText.BackgroundTransparency = 1.000
+    NormalText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    NormalText.BorderSizePixel = 0
+    NormalText.Position = UDim2.new(0.266622633, 0, 0.0254498105, 0)
+    NormalText.Size = UDim2.new(0, 83, 0, 30)
+    NormalText.Font = Enum.Font.SourceSans
+    NormalText.Text = text
+    NormalText.TextColor3 = Color3.fromRGB(255, 255, 255)
+    NormalText.TextSize = 14.000
+
+    Top_Text.Name = "Top_Text"
+    Top_Text.Parent = MainFrame
+    Top_Text.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Top_Text.BackgroundTransparency = 1.000
+    Top_Text.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Top_Text.BorderSizePixel = 0
+    Top_Text.Position = UDim2.new(-0.0868929774, 0, -0.258626312, 0)
+    Top_Text.Size = UDim2.new(0, 83, 0, 30)
+    Top_Text.Font = Enum.Font.SourceSans
+    Top_Text.Text = top_text
+    Top_Text.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Top_Text.TextSize = 10.000
+
+    Image.Name = "Image"
+    Image.Parent = MainFrame
+    Image.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Image.BackgroundTransparency = 1.000
+    Image.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Image.BorderSizePixel = 0
+    Image.Position = UDim2.new(-0.0409090891, 0, -0.575757563, 0)
+    Image.Size = UDim2.new(0, 68, 0, 71)
+    Image.Image = "http://www.roblox.com/asset/?id=18921384646"
+
+    game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(1, Enum.EasingStyle.Quart), {Position = UDim2.new(.95, 0, 0.863177776 - yOffset / 500, 0)}):Play()
+    task.wait(.7)
+    game:GetService("TweenService"):Create(UIStroke, TweenInfo.new(1, Enum.EasingStyle.Quart), {Transparency = 0}):Play()
+    if wait_seconds then
+        task.wait(wait_seconds)
+        game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(1), {Position = UDim2.new(1.2, 0, 0.863177776 - yOffset / 500, 0)}):Play()
+        task.wait(1)
+        NotifyLib:Destroy()
+    end
+end
